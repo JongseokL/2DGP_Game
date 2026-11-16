@@ -1,11 +1,13 @@
 from pico2d import *
 from map import Map
 from car import Car
+from civilian import CivilianTraffic
 
 
 open_canvas(1100, 880)
 road_map = Map()
 player_car = Car()
+traffic = CivilianTraffic()
 running = True
 previous_time = get_time()
 
@@ -24,8 +26,10 @@ while running:
         break
     player_car.update(frame_time)
     road_map.update(player_car.travel_distance)
+    traffic.update(frame_time, player_car.travel_distance)
     clear_canvas()
     road_map.draw()
+    traffic.draw()
     player_car.draw()
     update_canvas()
     delay(0.01)
