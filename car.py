@@ -16,6 +16,7 @@ class Car:
         self.height = 180 * 880 / 1080
         self.pressed_keys = set()
         self.speed = 0.0
+        self.travel_distance = 0.0
         self.max_speed = 320.0
         self.acceleration = 240.0
         self.braking = 640.0
@@ -39,7 +40,7 @@ class Car:
         previous_speed = self.speed
         self.speed = max(0.0, min(self.max_speed,
                                 self.speed + acceleration * frame_time))
-        self.y += (previous_speed + self.speed) * 0.5 * frame_time
+        self.travel_distance = (previous_speed + self.speed) * 0.5 * frame_time
         direction = (int(SDLK_RIGHT in self.pressed_keys)
                      - int(SDLK_LEFT in self.pressed_keys))
         self.x += direction * self.steer_speed * frame_time
@@ -48,8 +49,6 @@ class Car:
         half_width, half_height = self.width / 2, self.height / 2
         self.x = max(half_width, min(get_canvas_width() - half_width, self.x))
         self.y = max(half_height, min(get_canvas_height() - half_height, self.y))
-        if self.y >= get_canvas_height() - half_height:
-            self.speed = 0.0
 
     def draw(self):
         self.image.clip_draw(95, 667, 253, 552,

@@ -23,6 +23,7 @@ while running:
     if not running:
         break
     player_car.update(frame_time)
+    road_map.update(player_car.travel_distance)
     clear_canvas()
     road_map.draw()
     player_car.draw()
