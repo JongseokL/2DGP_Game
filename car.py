@@ -11,7 +11,7 @@ class Car:
                       / 'player' / 'player_basic_car.png')
         self.image = load_image(str(image_path))
         self.x = 1163 * 1100 / 1350
-        self.y = 130 * 880 / 1080
+        self.y = get_canvas_height() / 2
         self.width = 80 * 1100 / 1350 * 270 / 253
         self.height = 180 * 880 / 1080
         self.pressed_keys = set()
