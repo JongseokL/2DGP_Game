@@ -12,7 +12,7 @@ class Car:
         self.image = load_image(str(image_path))
         self.x = 1163 * 1100 / 1350
         self.y = 130 * 880 / 1080
-        self.width = 80 * 1100 / 1350
+        self.width = 80 * 1100 / 1350 * 270 / 253
         self.height = 180 * 880 / 1080
         self.pressed_keys = set()
         self.speed = 0.0
@@ -22,6 +22,7 @@ class Car:
         self.braking = 640.0
         self.coasting = 100.0
         self.steer_speed = 260.0
+        self.steer_direction = 0
 
     def handle_event(self, event):
         if event.type == SDL_KEYDOWN:
@@ -43,6 +44,7 @@ class Car:
         self.travel_distance = (previous_speed + self.speed) * 0.5 * frame_time
         direction = (int(SDLK_RIGHT in self.pressed_keys)
                      - int(SDLK_LEFT in self.pressed_keys))
+        self.steer_direction = direction
         self.x += direction * self.steer_speed * frame_time
 
         # Keep the full sprite inside the canvas, including its transparent margin.
@@ -51,5 +53,8 @@ class Car:
         self.y = max(half_height, min(get_canvas_height() - half_height, self.y))
 
     def draw(self):
-        self.image.clip_draw(95, 667, 253, 552,
+        # Bottom row: left steering, straight, right steering.
+        # Equal crop sizes preserve the sprite scale between poses.
+        frame_left = {-1: 85, 0: 492, 1: 899}[self.steer_direction]
+        self.image.clip_draw(frame_left, 35, 270, 552,
                              self.x, self.y, self.width, self.height)
