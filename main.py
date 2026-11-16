@@ -4,6 +4,7 @@ from car import Car
 from civilian import CivilianTraffic
 from oil import OilWeapon
 from mine import MineWeapon
+from bullet import BulletWeapon
 
 
 open_canvas(1100, 880)
@@ -12,6 +13,7 @@ player_car = Car()
 traffic = CivilianTraffic()
 oil_weapon = OilWeapon()
 mine_weapon = MineWeapon()
+bullet_weapon = BulletWeapon()
 running = True
 previous_time = get_time()
 
@@ -27,6 +29,7 @@ while running:
             player_car.handle_event(event)
             oil_weapon.handle_event(event, player_car)
             mine_weapon.handle_event(event, player_car)
+            bullet_weapon.handle_event(event, player_car)
 
     if not running:
         break
@@ -34,12 +37,14 @@ while running:
     road_map.update(player_car.travel_distance)
     oil_weapon.update(frame_time, player_car.travel_distance)
     mine_weapon.update(frame_time, player_car.travel_distance)
+    bullet_weapon.update(frame_time)
     traffic.update(frame_time, player_car.travel_distance)
     clear_canvas()
     road_map.draw()
     oil_weapon.draw()
     mine_weapon.draw()
     traffic.draw()
+    bullet_weapon.draw()
     player_car.draw()
     update_canvas()
     delay(0.01)
