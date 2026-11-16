@@ -13,4 +13,4 @@ class Map:
         self.image = load_image(str(image_path))
 
     def draw(self):
-        self.image.draw(675, 540, 1350, 1080)
+        self.image.draw(550, 440, 1100, 880)

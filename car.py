@@ -13,10 +13,10 @@ class Car:
         self.image = load_image(str(image_path))
 
         # 기본 도로의 가장 오른쪽 차선 중앙, 화면 하단에서 시작한다.
-        self.x = 1163
-        self.y = 130
-        self.width = 80
-        self.height = 180
+        self.x = 1163 * 1100 / 1350
+        self.y = 130 * 880 / 1080
+        self.width = 80 * 1100 / 1350
+        self.height = 180 * 880 / 1080
 
     def draw(self):
         # 시트 좌측 상단의 직진 프레임을 사용한다. 원본 크기: 1254 x 1254.

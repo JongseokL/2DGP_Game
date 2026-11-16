@@ -3,7 +3,7 @@ from map import Map
 from car import Car
 
 
-open_canvas(1350, 1080)
+open_canvas(1100, 880)
 
 road_map = Map()
 player_car = Car()
