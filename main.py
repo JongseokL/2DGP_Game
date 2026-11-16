@@ -2,7 +2,7 @@ from pico2d import *
 from map import Map
 
 
-open_canvas(800, 600)
+open_canvas(1350, 1080)
 
 road_map = Map()
 running = True
